@@ -27,7 +27,7 @@
     <repository>
       <id>github</id>
       <name>GitHub Packages</name>
-      <url>https://maven.pkg.github.com/Harsika-dev/publish-java-package-with-maven</url>
+      <url>https://maven.pkg.github.com/Harsika-dev/publish-java-package-with-maven-on-github-packages</url>
     </repository>
   </distributionManagement>
 
