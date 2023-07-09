@@ -2,6 +2,30 @@ name: Publish package to GitHub Packages
 on: 
   workflow_dispatch:
 jobs:
+  extract-version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install python packages
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+
+      - name: Run Python Script
+        id: storeVersion
+        run: |
+          python scripts/extract_version.py 
+
+      - name: Print Extracted Version
+        run: |
+          echo "Extracted Version: ${{ steps.storeVersion.outputs.extracted_version }}"
   publish:
     runs-on: ubuntu-latest 
     permissions: 
@@ -17,3 +41,7 @@ jobs:
         run: mvn --batch-mode deploy
         env:
           GITHUB_TOKEN: ${{ secrets.JAVA_TOKEN }}
+
+
+
+          
